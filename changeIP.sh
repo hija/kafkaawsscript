@@ -25,7 +25,7 @@ function find_kafka_config() {
 function restart_kafka() {
   if (whiptail --title "Change successful" --yesno "The zookeeper ip for kafka has been changed. Do you want to run kafka now?" 8 78) then
     echo -e "[INFO] Starting Kafka..."
-    sh "${kafka_path%/}/bin/zookeeper-server-start.sh" $config_path
+    sh "${kafka_path%/}/bin/kafka-server-start.sh" $config_path
   else
     echo -e "[INFO] Done."
   fi
