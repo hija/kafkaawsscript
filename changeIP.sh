@@ -65,6 +65,10 @@ function check_ip() {
   fi
 }
 
+function configure_emr() {
+  ansible-playbook -i "$1", -u hadoop Playbooks/EMR.yml
+}
+
 function main() {
   # Check if user is root
   if [[ ! $EUID -eq 0 ]]; then
@@ -80,6 +84,8 @@ function main() {
   check_ip $ERM_IP
   change_zookeeper_ip $ERM_IP
 
+  # Configure emr
+  configure_emr $ERM_IP
   # Ask if restart kafka
   restart_kafka
 }
